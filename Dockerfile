@@ -19,7 +19,8 @@ RUN wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=
     rm jdk-8u51-linux-x64.rpm
 
 # install pip dependencies
-ENV ANSIBLE_VERSION=2.1.1.0
+# FIXME ansible is broken for ECS deploys in newer versions than this
+ENV ANSIBLE_VERSION=2.0.2.0
 RUN pip install ansible==$ANSIBLE_VERSION boto boto3 awscli setuptools --upgrade > /dev/null
 
 # install docker
