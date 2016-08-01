@@ -9,6 +9,9 @@ RUN yum upgrade -y > /dev/null
 RUN yum install -y epel-release > /dev/null && \
     yum install -y wget git python-pip gcc python-devel libffi-devel openssl-devel python-setuptools > /dev/null
 
+# upgrade pip
+RUN pip install --upgrade pip > /dev/null
+
 # install oracle jdk
 RUN wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
         http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.rpm && \
@@ -16,7 +19,8 @@ RUN wget -q --no-check-certificate --no-cookies --header "Cookie: oraclelicense=
     rm jdk-8u51-linux-x64.rpm
 
 # install pip dependencies
-RUN pip install ansible boto boto3 awscli setuptools --upgrade > /dev/null
+ENV ANSIBLE_VERSION=2.1.1.0
+RUN pip install ansible==$ANSIBLE_VERSION boto boto3 awscli setuptools --upgrade > /dev/null
 
 # install docker
 RUN ( curl -sSL https://get.docker.com/ | sh ) > /dev/null
