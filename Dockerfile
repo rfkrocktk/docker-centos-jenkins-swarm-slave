@@ -11,7 +11,7 @@ RUN rpm -ivh jdk-8u51-linux-x64.rpm && rm jdk-8u51-linux-x64.rpm
 
 RUN yum install -y git python-pip gcc python-devel libffi-devel openssl-devel python-setuptools
 
-RUN pip install ansible && pip install boto boto3 awscli
+RUN pip install ansible boto boto3 awscli setuptools --upgrade
 
 ## install nodejs
 ## gpg keys listed at https://github.com/nodejs/node
